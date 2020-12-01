@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизуйтесь</title>
+</head>
+<body>
+    {% if form.errors %}
+    <p>Вы ввели неверные данные</p>
+    {% endif %}
+
+    {% if next %}
+        <p>Доступ запрещен</p>
+    {% endif %}
+
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <p>Логин: {{ form.username }}</p>
+        <p>Пароль: {{ form.password }}</p>
+
+        <p><input type="submit" value="Войти"></p>
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+</body>
+</html>
